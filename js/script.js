@@ -1,65 +1,104 @@
-// altijd verplicht bijzetten 
 "use strict";
 
+const keyCoding = "abcdefghijklmnopqrstuvwxyz,.! ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const example = "Dit is een geheime boodschap. Zorg via de code dat deze wordt omgezet naar geheimtaal!"
+let btnCode, btnDecode,txaTextArea, btnSample;
+let inputLength;
+let newIndexPosition;
+let newNegativeIndexPosition;
+let input;
+let newLetter;
+let newWord;
 
-//const declaratie en initialisatie
-const date = new Date();
-// let strTime;
-let hours,minutes,seconds;
+window.addEventListener('load', initialize);
 
-let btnShow;
-
-let divUur;
-let divMinuut;
-let divSecond;
-
-
-//wait for document load
-window.addEventListener('load',Initialize);
-
-function Initialize(){
-   
-    
-    btnShow = document.getElementById("show");
-
-    divUur = document.getElementById("uur")
-    divMinuut = document.getElementById("minuut")
-    divSecond = document.getElementById("second")
-
-
-    
-    
-    //get hours, minutes and seconds
-    hours = date.getHours();
-    minutes = date.getMinutes();
-    seconds = date.getSeconds();
-
-
-
-    // strTime = `Het is nu ${hours} uur, ${minutes} minuten en ${seconds}`;
-
-    btnShow.addEventListener('click', displayHours)
-    btnShow.addEventListener('click', displayMinutes)
-    btnShow.addEventListener('click', displaySeconds)
-
+function initialize() {
+    bindElements();
+    addEvents();
 
 }
+function bindElements() {
+    btnCode=document.getElementById("codeer");
+    btnCode.className="btn-yellow";
 
-function displaySeconds(){
-    console.log(seconds);
-    divSecond.className ="feedback3";
-    divSecond.textContent = `${seconds}`
+    btnDecode=document.getElementById("decodeer");
+    btnDecode.className="btn-pink";
+
+    btnSample=document.getElementById("sample");
+    btnSample.className="btn-green";
+
+    txaTextArea=document.getElementById("textarea");
+
+  
 }
-function displayHours(){
-    
-    console.log(hours);
-    divUur.className ="feedback";
-    divUur.textContent = `${hours}:`
+function addEvents() {
+    btnCode.addEventListener("click",code);
+    btnDecode.addEventListener("click",decode);
+    btnSample.addEventListener("click",sample);
+    txaTextArea.addEventListener("dblclick",deleteCode);
+}
+function code() {
+    readInput();
+    let singleCharacterOfInput;
+    newWord="";
+
+    for ( let i=0; i<inputLength; i++) {
+        
+        singleCharacterOfInput = input.charAt(i);
+        let positionOfCharacterInKey;
+        positionOfCharacterInKey=keyCoding.indexOf(singleCharacterOfInput);
+        newIndexPosition = positionOfCharacterInKey + i + 1;   
+
+            while(newIndexPosition >= 56){
+            newIndexPosition -= 56;
+            }
+
+        newLetter =keyCoding.charAt(newIndexPosition);
+        makeNewWord();
+    }
+
+    displayNewWord(); 
+
+}
+function decode() {
+    readInput();
+    let singleCharacterOfInput;
+    newWord="";
+
+    for ( let i=0; i<inputLength; i++) {
+        
+        singleCharacterOfInput = input.charAt(i);
+        let positionOfCharacterInKey;
+        positionOfCharacterInKey=keyCoding.indexOf(singleCharacterOfInput);
+        newIndexPosition = positionOfCharacterInKey - i + 55;
+        while(newIndexPosition >= 56){
+                newIndexPosition -= 56;
+        }
+        newLetter =keyCoding.charAt(newIndexPosition);
+        makeNewWord();
+    }
+
+    displayNewWord();    
+      
+}
+function sample(){
+    txaTextArea.value="";
+    txaTextArea.value=example;
+}
+function makeNewWord() {
+    newWord += newLetter;
+}
+function displayNewWord() {
+    txaTextArea.value="";
+    txaTextArea.value=newWord;
+}
+function readInput() {
+    input = txaTextArea.value;
+    inputLength = input.length;
+}
+function deleteCode() {
+    txaTextArea.value="";
 }
 
-function displayMinutes(){
-    console.log(minutes);
-    divMinuut.className ="feedback2";
-    divMinuut.textContent = `${minutes}:`
-}
 
+ 

@@ -1,10 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 /* CSS Variables */
-html,body{
-  margin:0;
-  background-color:pink;
 
-}
 :root {
   /* Howest colors */
   --blue: #44C8F5;
@@ -21,7 +17,10 @@ html,body{
 body {
   font-family: 'Open Sans', sans-serif;
   background-color: var(--white);
-  color:pink;
+  color: var(--black);
+  line-height: 1.5em;
+  width: 90%;
+  margin : 0 auto;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -35,6 +34,7 @@ button {
   padding: 10px 20px;
   border-radius: 5px;
   border-style: solid;
+  
 }
 
 .btn-yellow {
@@ -51,6 +51,17 @@ button {
   background-color: var(--yellow);
 }
 
+
+.btn-green {
+  border-color: var(--green);
+  background-color: var(--lightgreen);
+  color: var(--black);
+}
+
+
+.btn-green:hover {
+  background-color: var(--green);
+}
 .btn-pink {
   border-color: var(--pink);
   background-color: var(--lightpink);
@@ -79,26 +90,13 @@ select {
   float: right;
 }
 
-.feedback {
-  color: white;
-  background-color: pink;
- 
-  width:25%;
-  height: 25%;
-
+a{
+  text-decoration: none;
+  margin-left : 20px;
 }
 
-#box{
-  display:flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content:center;
-  font-size:500%;
-  text-align: center;
-  background-color:pink;
-  
- 
+a:hover {
+  background-color: cornflowerblue;
+  color : whitesmoke;
 }
-
-
 
